@@ -57,11 +57,12 @@ export class Player
         this.pointRight();
     }
 
-    jump(up, down)
+    jump(up, down, max)
     {
         if(!down) down = 0;
+        if(!max) max = up;
 
-        const timeout = 50;
+        const timeout = 20;
 
         if(up > 0) 
         {
@@ -81,7 +82,7 @@ export class Player
 
         this.move(this.point);
 
-        setTimeout(() => this.jump(up, down), timeout);
+        setTimeout(() => this.jump(up, down, max), timeout);
         // for(var i = 0; i < magnitude; i++)
         // {
         //     this.point.y -= (magnitude - i);
