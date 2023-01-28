@@ -1,37 +1,34 @@
 import { Point } from "./point.js"
-import { Actor } from "/js/actor.js"
+import { Player } from "/js/player.js"
 
 export class WorldService
 {
-    #actor;
+    #player;
 
     constructor()
     {
-        this.#actor = new Actor( new Point(100,100));
+        this.#player = new Player( new Point(100,400));
         console.log('world service started...');
     }
 
 
     actorKeyPress(key)
     {
-        var point = this.#actor.point;
+        var point = this.#player.point;
         switch(key)
         {
-            case "ArrowUp": 
-                var newPoint = new Point(point.x, point.y - 1);
-                this.#actor.move(newPoint)
+            case "ArrowUp":                 
+                this.#player.jump(15)
                 break;
             case "ArrowRight":
-                var newPoint = new Point(point.x + 1, point.y);
-                this.#actor.move(newPoint)
+                this.#player.moveRight()
                 break;
-            case "ArrowDown":
-                var newPoint = new Point(point.x, point.y + 1);
-                this.#actor.move(newPoint)
-                break;
+            // case "ArrowDown":
+            //     var newPoint = new Point(point.x, point.y + 1);
+            //     this.#player.move(newPoint)
+            //     break;
             case "ArrowLeft":
-                var newPoint = new Point(point.x - 1, point.y);
-                this.#actor.move(newPoint)
+                this.#player.moveLeft()
                 break;
         }
     }
