@@ -13,7 +13,7 @@ export class Player
         div.style.height = "100px";
         //div.style.backgroundColor = "pink";
         div.style.position = "absolute";
-        div.style.backgroundImage = "Url('./img/dog.png')"
+        div.style.backgroundImage = "Url('../img/dog.png')"
         div.style.backgroundSize = "contain";
         
         this.#div = div;
