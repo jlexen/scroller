@@ -1,0 +1,39 @@
+<html>
+<head>
+    <script type="module" >
+        import { WorldService } from "/js/WorldService.js";
+
+        var worldService = new WorldService();
+
+        document.body.onkeydown = function(e)
+        {
+            worldService.actorKeyPress(e.key);
+        }
+        // worldManager.initialize();
+        // worldManager.startClock();
+        
+        // document.body.onkeyup = function(e){
+        //     if(e.keyCode == 32){
+        //         worldManager.pauseClockToggle();
+        //         if(worldManager.pause)
+        //         {
+        //             alert(worldManager.buildPopulationReport());
+        //         }                
+        //     }
+            
+        // }
+    </script>
+</head>>
+<body style="background-color: black;">
+    <div 
+        id="viewport" 
+        style="width: 500px; height: 400px; 
+        margin-top: 100px; margin-left: 100px; 
+        background-color: lightblue;  "
+    >
+
+        
+
+    </div>
+</body>
+</html>
