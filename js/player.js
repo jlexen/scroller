@@ -5,8 +5,10 @@ export class Player
     #moveSpeed = 10;
 
     // todo: replace with gif
-    #imageFrames = ["dog1.png", "dog2.png"];
-    #imageFrame = 0;
+    #walkFrames = ["dog1.png", "dog2.png"];
+    #walkFrame = 0;
+    #downFrames = ["dog-sit.png", "dog-down.png", "dog-sleep.png"];    
+    #downFrame = 0;
 
     constructor(point)
     {
@@ -31,14 +33,14 @@ export class Player
 
     setImage()
     {
-        if(this.#imageFrame > this.#imageFrames.length - 1)
+        if(this.#walkFrame > this.#walkFrames.length - 1)
         {
-            this.#imageFrame = 0;
+            this.#walkFrame = 0;
         }
 
-        this.#div.style.backgroundImage = `Url(./img/${this.#imageFrames[this.#imageFrame]})`;
+        this.#div.style.backgroundImage = `Url(./img/${this.#walkFrames[this.#walkFrame]})`;
 
-        this.#imageFrame++;
+        this.#walkFrame++;
     }
 
     move(point)
@@ -46,7 +48,9 @@ export class Player
         this.#div.style.left = `${point.x}px`;
         this.#div.style.top = `${point.y}px`;
         this.point = point;
-        this.setImage()
+        this.setImage();
+
+        this.#downFrame = 0;
     }
 
     pointLeft()
@@ -75,7 +79,16 @@ export class Player
 
     sit()
     {
-        this.#div.style.backgroundImage = `Url(./img/dog-sit.png)`;
+        
+
+        
+
+        this.#div.style.backgroundImage = `Url(./img/${this.#downFrames[this.#downFrame]})`;
+
+        if(this.#downFrame < this.#downFrames.length - 1)
+        {            
+            this.#downFrame++;
+        }
     }
 
     jump(up, down, max)
