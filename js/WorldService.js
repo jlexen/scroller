@@ -20,9 +20,12 @@ export class WorldService
             case "ArrowRight":
                 this.#player.moveRight()
                 break;
+            case "ArrowDown":
+                this.#player.sit();
+                break;
             case "ArrowLeft":
                 this.#player.moveLeft()
-                break;
+                break;            
         }
     }
 }

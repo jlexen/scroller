@@ -73,6 +73,11 @@ export class Player
         this.pointRight();
     }
 
+    sit()
+    {
+        this.#div.style.backgroundImage = `Url(./img/dog-sit.png)`;
+    }
+
     jump(up, down, max)
     {
         if(!down) down = 0;
