@@ -45,7 +45,6 @@ export class Player extends WorldObject
         
                 this.#walkFrame++;
 
-                this.#downFrame = 0;
                 break;
             case this.positions.Sitting:
                 this.setBackgroundImage('dog-sit.png')
