@@ -11,7 +11,6 @@ export class Player
         var div = document.createElement("div");
         div.style.width = "100px";
         div.style.height = "100px";
-        //div.style.backgroundColor = "pink";
         div.style.position = "absolute";
         div.style.backgroundImage = "Url('../img/dog.png')"
         div.style.backgroundSize = "contain";
@@ -32,10 +31,7 @@ export class Player
 
     pointLeft()
     {
-        //this.#div.style.MozTransform = "scale(-1, -1);";
         this.#div.style.transform = "scalex(-1)";
-        this.#div.style.webkitTransform  = "scalex(-1);";
-        //this.#div.style.top = 500;
     }
 
     pointRight()
@@ -83,19 +79,5 @@ export class Player
         this.move(this.point);
 
         setTimeout(() => this.jump(up, down, max), timeout);
-        // for(var i = 0; i < magnitude; i++)
-        // {
-        //     this.point.y -= (magnitude - i);
-        //     this.move(this.point)
-        //     setTimeout(() => console.log(i), timeout);
-        // }
-
-        // // going down...
-        // for(var i = magnitude; i >= 0; i--)
-        // {
-        //     this.point.y += (magnitude - i);
-        //     this.move(this.point)
-        //     setTimeout(() => console.log(i), timeout);
-        // }
     }
 }
