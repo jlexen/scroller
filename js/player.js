@@ -1,7 +1,8 @@
-export class Player
+import { Dimensions } from "./dimensions.js"
+import { WorldObject } from "./worldObject.js";
+
+export class Player extends WorldObject
 {
-    point;
-    #div;
     #moveSpeed = 10;
 
     // todo: replace with gif
@@ -12,23 +13,12 @@ export class Player
 
     constructor(point)
     {
-        this.point = point;
-       
-        //#region create div
-        var div = document.createElement("div");
-        div.style.width = "100px";
-        div.style.height = "100px";
-        div.style.position = "absolute";
-        
-        div.style.backgroundSize = "contain";        
-        this.#div = div;
-        //#endregion
+               
+        var dimensions = new Dimensions(100, 100);
+        super(point, dimensions);
 
         this.setImage()
-        this.move(point);
-
-        var viewPort = document.getElementById('viewport');
-        viewPort.appendChild(div);
+        this.move(point);        
     }
 
     setImage()
@@ -38,29 +28,17 @@ export class Player
             this.#walkFrame = 0;
         }
 
-        this.#div.style.backgroundImage = `Url(./img/${this.#walkFrames[this.#walkFrame]})`;
+        this.setBackgroundImage(this.#walkFrames[this.#walkFrame]);
 
         this.#walkFrame++;
     }
 
     move(point)
     {
-        this.#div.style.left = `${point.x}px`;
-        this.#div.style.top = `${point.y}px`;
-        this.point = point;
+        this.moveObjectToPoint(point);
         this.setImage();
 
         this.#downFrame = 0;
-    }
-
-    pointLeft()
-    {
-        this.#div.style.transform = "scalex(-1)";
-    }
-
-    pointRight()
-    {
-        this.#div.style.transform = null;
     }
 
     moveLeft()
@@ -78,13 +56,8 @@ export class Player
     }
 
     sit()
-    {
-        
-
-        
-
-        this.#div.style.backgroundImage = `Url(./img/${this.#downFrames[this.#downFrame]})`;
-
+    {                
+        this.setBackgroundImage(this.#downFrames[this.#downFrame]);
         if(this.#downFrame < this.#downFrames.length - 1)
         {            
             this.#downFrame++;
