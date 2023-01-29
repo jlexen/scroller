@@ -4,22 +4,41 @@ export class Player
     #div;
     #moveSpeed = 10;
 
+    // todo: replace with gif
+    #imageFrames = ["dog1.png", "dog2.png"];
+    #imageFrame = 0;
+
     constructor(point)
     {
         this.point = point;
        
+        //#region create div
         var div = document.createElement("div");
         div.style.width = "100px";
         div.style.height = "100px";
         div.style.position = "absolute";
-        div.style.backgroundImage = "Url('./img/dog.png')"
-        div.style.backgroundSize = "contain";
         
+        div.style.backgroundSize = "contain";        
         this.#div = div;
+        //#endregion
+
+        this.setImage()
         this.move(point);
 
         var viewPort = document.getElementById('viewport');
         viewPort.appendChild(div);
+    }
+
+    setImage()
+    {
+        if(this.#imageFrame > this.#imageFrames.length - 1)
+        {
+            this.#imageFrame = 0;
+        }
+
+        this.#div.style.backgroundImage = `Url(./img/${this.#imageFrames[this.#imageFrame]})`;
+
+        this.#imageFrame++;
     }
 
     move(point)
@@ -27,6 +46,7 @@ export class Player
         this.#div.style.left = `${point.x}px`;
         this.#div.style.top = `${point.y}px`;
         this.point = point;
+        this.setImage()
     }
 
     pointLeft()
