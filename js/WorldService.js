@@ -23,13 +23,13 @@ export class WorldService
         switch(key)
         {
             case "ArrowUp":                 
-                this.#player.jump(10)
+                this.#player.up()
                 break;
             case "ArrowRight":
                 this.#player.moveRight()
                 break;
             case "ArrowDown":
-                this.#player.sit();
+                this.#player.down();
                 break;
             case "ArrowLeft":
                 this.#player.moveLeft()

@@ -8,8 +8,15 @@ export class Player extends WorldObject
     // todo: replace with gif
     #walkFrames = ["dog1.png", "dog2.png"];
     #walkFrame = 0;
-    #downFrames = ["dog-sit.png", "dog-down.png", "dog-sleep.png"];    
-    #downFrame = 0;
+
+    positions = {
+        Walking : 'Walking',
+        Sitting : 'Sitting',
+        Down : 'Down',
+        Stealth : 'Steath'
+    };
+
+    position;
 
     constructor(point)
     {
@@ -17,32 +24,54 @@ export class Player extends WorldObject
         var dimensions = new Dimensions(100, 100);
         super(point, dimensions);
 
-        this.setImage()
-        this.move(point);        
+        this.move(point);
+
+        this.setPosition(this.positions.Walking);
     }
 
-    setImage()
+    setPosition(position)
     {
-        if(this.#walkFrame > this.#walkFrames.length - 1)
+        this.position = position;
+        
+        switch(position)
         {
-            this.#walkFrame = 0;
+            case this.positions.Walking:
+                if(this.#walkFrame > this.#walkFrames.length - 1)
+                {
+                    this.#walkFrame = 0;
+                }
+        
+                this.setBackgroundImage(this.#walkFrames[this.#walkFrame]);
+        
+                this.#walkFrame++;
+
+                this.#downFrame = 0;
+                break;
+            case this.positions.Sitting:
+                this.setBackgroundImage('dog-sit.png')
+                break;
+            case this.positions.Down:
+                this.setBackgroundImage('dog-down.png')
+                break;
+            case this.positions.Stealth:
+                this.setBackgroundImage('dog-stealth.png')
+                break;
         }
-
-        this.setBackgroundImage(this.#walkFrames[this.#walkFrame]);
-
-        this.#walkFrame++;
     }
 
     move(point)
     {
         this.moveObjectToPoint(point);
-        this.setImage();
-
-        this.#downFrame = 0;
+        this.setPosition(this.positions.Walking);        
     }
 
     moveLeft()
     {
+        if(this.position !== this.positions.Walking)
+        {
+            return;
+        }
+
         this.point.x -= this.#moveSpeed;
         this.move(this.point);
         this.pointLeft();
@@ -50,18 +79,47 @@ export class Player extends WorldObject
 
     moveRight()
     {
+        if(this.position !== this.positions.Walking)
+        {
+            return;
+        }
+
         this.point.x += this.#moveSpeed;
         this.move(this.point);
         this.pointRight();
     }
 
-    sit()
-    {                
-        this.setBackgroundImage(this.#downFrames[this.#downFrame]);
-        if(this.#downFrame < this.#downFrames.length - 1)
-        {            
-            this.#downFrame++;
+    down()
+    {      
+        switch(this.position)
+        {
+            case this.positions.Walking:
+                this.setPosition(this.positions.Sitting);
+                break;
+            case this.positions.Sitting:
+                this.setPosition(this.positions.Down);
+                break;
+            case this.positions.Down:
+                this.setPosition(this.positions.Stealth);
+                break;
         }
+    }
+
+    up()
+    {
+
+        switch(this.position)
+        {
+            case this.positions.Stealth:
+                this.setPosition(this.positions.Down);
+                break;
+            case this.positions.Down:
+                this.setPosition(this.positions.Walking);
+                break;
+            case this.positions.Walking:
+                this.jump(10);
+                break;
+        }        
     }
 
     jump(up, down, max)
