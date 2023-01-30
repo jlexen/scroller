@@ -1,3 +1,5 @@
+import { DOMManager } from "./domManager.js";
+
 export class WorldObject
 {
     point;
@@ -6,43 +8,28 @@ export class WorldObject
 
     constructor(point, dimensions)
     {
-        //#region create element
-        var element = document.createElement("div");
-        element.style.width = `${dimensions.width}px`;
-        element.style.height = `${dimensions.height}px`;
-        element.style.position = "absolute";
-        element.style.zIndex
-        
-        element.style.backgroundSize = "contain";        
-        
-        var viewPort = document.getElementById('viewport');
-        viewPort.appendChild(element);
+        this.#element = DOMManager.createElement(point, dimensions);
 
-        this.#element = element;
-        //#endregion
-
-        this.moveObjectToPoint(point);
     }
 
     moveObjectToPoint(point)
     {
-        this.#element.style.left = `${point.x}px`;
-        this.#element.style.top = `${point.y}px`;
+        DOMManager.moveElementToPoint(this.#element, point);
         this.point = point;
     }
 
-    setBackgroundImage(fileName)
+    setBackgroundImage(imageFileName)
     {
-        this.#element.style.backgroundImage = `Url(./img/${fileName})`;
+        DOMManager.setElementBackgroundImage(this.#element, imageFileName);
     }
 
     pointLeft()
     {
-        this.#element.style.transform = "scalex(-1)";
+        DOMManager.transformElementMirror(this.#element);
     }
 
     pointRight()
     {
-        this.#element.style.transform = null;
+        DOMManager.transformElementClear(this.#element);
     }
 }
