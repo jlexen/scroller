@@ -15,7 +15,9 @@ export class DOMManager
         viewPortElement.style.left = '50%';
         viewPortElement.style.marginRight = '-50%';
         viewPortElement.style.transform = 'translate(-50%, -50%)';
-        viewPortElement.style.backgroundImage = "url('./img/background.png')"; 
+        viewPortElement.style.backgroundImage = "url('./img/sunset-background.png')"; 
+        viewPortElement.style.backgroundSize = "cover";
+        viewPortElement.style.backgroundRepeat = "no-repeat";
         
         var bodyElement = document.getElementsByTagName('body')[0];
         bodyElement.appendChild(viewPortElement);
@@ -64,8 +66,7 @@ export class DOMManager
 
     static blurElement(element)
     {
-        /* -webkit-filter: blur(8px); */
-        element.style.filter = 'blur(8px);';
+        element.style.filter = 'blur(8px)';
     }
 
     static blurElementRemove(element)
