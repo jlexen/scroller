@@ -18,6 +18,7 @@ export class DOMManager
         viewPortElement.style.backgroundImage = "url('./img/sunset-background.png')"; 
         viewPortElement.style.backgroundSize = "cover";
         viewPortElement.style.backgroundRepeat = "no-repeat";
+        viewPortElement.style.imageRendering = "pixelated";
         
         var bodyElement = document.getElementsByTagName('body')[0];
         bodyElement.appendChild(viewPortElement);
