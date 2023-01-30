@@ -2,6 +2,7 @@ export class DOMManager
 {
     static viewPortHeight = 400;
     static viewPortWidth = 500;
+    static viewPortElement;
 
     static createViewPort()
     {
@@ -18,6 +19,8 @@ export class DOMManager
         
         var bodyElement = document.getElementsByTagName('body')[0];
         bodyElement.appendChild(viewPortElement);
+
+        this.viewPortElement = viewPortElement;
     }
 
     static createElement(point, dimensions)
@@ -57,5 +60,16 @@ export class DOMManager
     static transformElementClear(element)
     {
         element.style.transform = null;
+    }
+
+    static blurElement(element)
+    {
+        /* -webkit-filter: blur(8px); */
+        element.style.filter = 'blur(8px);';
+    }
+
+    static blurElementRemove(element)
+    {
+        element.style.filter = null;
     }
 }

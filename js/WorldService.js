@@ -2,6 +2,7 @@ import { Point } from "./point.js"
 import { Player } from "./player.js"
 import { Grass } from "./grass.js";
 import { DOMManager } from "./domManager.js";
+import { MenuManager } from "./menuManager.js";
 
 export class WorldService
 {
@@ -9,7 +10,7 @@ export class WorldService
 
     constructor()
     {
-        var viewport = DOMManager.createViewPort();
+        DOMManager.createViewPort();
 
         this.#player = new Player( new Point(0,300));
 
@@ -23,6 +24,23 @@ export class WorldService
 
     actorKeyPress(key)
     {
+        if(key === " ")
+        {
+            if(!MenuManager.isPaused)
+            {
+                MenuManager.Pause();
+            }
+            else
+            {
+                MenuManager.Resume();
+            }
+        }
+        
+        if(MenuManager.isPaused)
+        {
+            return;
+        }
+
         switch(key)
         {
             case "ArrowUp":                 
@@ -36,7 +54,7 @@ export class WorldService
                 break;
             case "ArrowLeft":
                 this.#player.moveLeft()
-                break;            
+                break;      
         }
     }
 }
