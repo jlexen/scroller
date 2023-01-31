@@ -1,6 +1,6 @@
 export class DOMManager
 {
-    static viewPortHeight = 400;
+    static viewPortHeight = 430;
     static viewPortWidth = 500;
     static viewPortElement;
 
@@ -15,7 +15,7 @@ export class DOMManager
         viewPortElement.style.left = '50%';
         viewPortElement.style.marginRight = '-50%';
         viewPortElement.style.transform = 'translate(-50%, -50%)';
-        viewPortElement.style.backgroundImage = "url('./img/sunset-background.png')"; 
+        viewPortElement.style.backgroundImage = "url('./img/rift.png')"; 
         viewPortElement.style.backgroundSize = "cover";
         viewPortElement.style.backgroundRepeat = "no-repeat";
         viewPortElement.style.imageRendering = "pixelated";
